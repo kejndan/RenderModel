@@ -28,15 +28,15 @@ def render_with_shaders(world_space, visual_model, img):
 
 if __name__ == '__main__':
     size = (512, 512)
-    path = 'models'
+    path = '../models'
     b = os.path.join(path,'floor.obj')
     a = os.path.join(path,'face.obj')
     c = os.path.join(path,'BRBC.obj')
     d = os.path.join(path,'eye_model.obj')
-    eye_tex = Image.open('models/eye_tex.tga')
-    storm_tex = Image.open('models/BRBC_tex.PNG')
-    african_tex = Image.open('models/african_head_diffuse.tga')
-    floor_tex = Image.open('models/floor_diffuse.tga')
+    eye_tex = Image.open('../models/eye_tex.tga')
+    storm_tex = Image.open('../models/BRBC_tex.PNG')
+    african_tex = Image.open('../models/african_head_diffuse.tga')
+    floor_tex = Image.open('../models/floor_diffuse.tga')
     yoda = 'yoda.obj'
     name_file = a
     img = np.zeros(shape=(size[0] + 1, size[1] + 1, 3)).astype(np.uint8)
@@ -45,7 +45,8 @@ if __name__ == '__main__':
     eye = LocalSpace(d, size=200, position=[0, 300, 0])
     stormtrooper = LocalSpace(c, size=200, position=[0, 400, 0],rot_y=90)
 
-    camera = Camera([300, 300, 300],face.data['position'])
+
+    camera = Camera([300, 300, 300],stormtrooper.data['position'])
     cam_front = Camera([0, 300, 500], face.data['position'])
     cam_top = Camera([0, 700, 1], face.data['position'])
     cam_bot = Camera([0, -700, 1], face.data['position'])
@@ -55,8 +56,8 @@ if __name__ == '__main__':
     cam_orth = Camera([-100, 270, 0], face.data['position'], type_camera=0, height_view=(200, -250))
 
 
-    objs = [floor,face]
-    colors = [floor_tex,african_tex]
+    objs = [stormtrooper]
+    colors = [storm_tex]
     cam = camera
     WS = WorldSpace(objs, cam)
     s = time()
